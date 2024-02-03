@@ -22,6 +22,7 @@ class DataTransformation:
     def __init__(self):
         self.data_transformation_config=DataTransformationConfig()
 
+    #Creating the data transformation pipeline
     def get_data_transformer_object(self):
         '''
         This function si responsible for data trnasformation
@@ -64,15 +65,12 @@ class DataTransformation:
                 ("cat_pipelines",cat_pipeline,categorical_columns)
 
                 ]
-
-
             )
-
             return preprocessor
         
         except Exception as e:
             raise CustomException(e,sys)
-        
+    #Reads training and testing data from CSV files, applies the data transformation pipeline to preprocess the data, and saves the preprocessor object to a file.    
     def initiate_data_transformation(self,train_path,test_path):
 
         try:
@@ -109,10 +107,8 @@ class DataTransformation:
             logging.info(f"Saved preprocessing object.")
 
             save_object(
-
                 file_path=self.data_transformation_config.preprocessor_obj_file_path,
                 obj=preprocessing_obj
-
             )
 
             return (
